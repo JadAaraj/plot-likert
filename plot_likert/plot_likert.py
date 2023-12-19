@@ -194,7 +194,7 @@ def plot_counts(
 
     # Add labels
     if bar_labels:
-        bar_label_fmt = bar_label_format + ("%%" if compute_percentages else "")
+        bar_label_fmt = bar_labels_format + ("%%" if compute_percentages else "")
         bar_size_cutoff = counts_sum * BAR_LABEL_SIZE_CUTOFF
 
         if isinstance(bar_labels_color, list):
