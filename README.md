@@ -4,22 +4,14 @@ This is a library to visualize results from [Likert-type](https://en.wikipedia.o
 
 ![A sample plot](docs/sample_plot.png)
 
+This repository is my modified version of the original library at https://github.com/nmalkin/plot-likert.git
 
 
 Installation
 ------------
-Install the latest stable version from PyPI:
 
 ```shell
-pip install plot-likert
-```
-
-To get the latest development version:
-
-```shell
-pip install --pre plot-likert
-# OR
-pip install git+https://github.com/nmalkin/plot-likert.git
+pip install git+https://github.com/lenhattu/plot-likert.git
 ```
 
 
