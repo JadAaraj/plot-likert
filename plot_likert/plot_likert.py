@@ -194,7 +194,7 @@ def plot_counts(
 
     # Add labels
     if bar_labels:
-        bar_label_format = BAR_LABEL_FORMAT + ("%%" if compute_percentages else "")
+        bar_label_fmt = bar_label_format + ("%%" if compute_percentages else "")
         bar_size_cutoff = counts_sum * BAR_LABEL_SIZE_CUTOFF
 
         if isinstance(bar_labels_color, list):
@@ -213,7 +213,7 @@ def plot_counts(
                 labels = axes.bar_label(
                     segment,
                     label_type="center",
-                    fmt=bar_label_format,
+                    fmt=bar_label_fmt,
                     padding=0,
                     color=bar_label_colors[i],
                     weight="bold",
@@ -412,6 +412,7 @@ def plot_likert(
         xtick_interval=xtick_interval,
         compute_percentages=plot_percentage,
         bar_labels=bar_labels,
+        bar_labels_format=bar_labels_format,
         bar_labels_color=bar_labels_color,
         **kwargs,
     )
