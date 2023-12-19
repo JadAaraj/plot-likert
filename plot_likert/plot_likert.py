@@ -350,6 +350,7 @@ def plot_likert(
     figsize=None,
     xtick_interval: typing.Optional[int] = None,
     bar_labels: bool = False,
+    bar_labels_format=BAR_LABEL_FORMAT,
     bar_labels_color: typing.Union[str, typing.List[str]] = "white",
     **kwargs,
 ) -> matplotlib.axes.Axes:
