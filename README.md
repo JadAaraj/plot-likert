@@ -11,9 +11,13 @@ Installation
 ------------
 
 ```shell
-pip install git+https://github.com/lenhattu/plot-likert.git
+pip install git+https://github.com/JadAaraj/plot-likert.git
 ```
 
+New Features on this Fork
+-------------------------
+
+Can add a specific fixed value for the left and right side of the x axis.
 
 Quick start
 -----------
