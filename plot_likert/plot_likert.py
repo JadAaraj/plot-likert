@@ -57,8 +57,8 @@ def plot_counts(
     bar_labels: bool = False,
     bar_labels_format=BAR_LABEL_FORMAT,
     bar_labels_color: typing.Union[str, typing.List[str]] = "white",
-    left_static_percent: int = None,
-    right_static_percent: int = None,
+    left_fixed_value: int = None,
+    right_fixed_value: int = None,
     **kwargs,
 ) -> matplotlib.axes.Axes:
     """
@@ -88,6 +88,10 @@ def plot_counts(
         Show a label with the value of each bar segment on top of it
     bar_labels_color : str or list of str = "white",
         If showing bar labels, use this color (or colors) for the text
+    left_fixed_value: int = None,
+        Set a fixed value for the left edge of the x-axis
+    right_fixed_value: int = None,
+        Set a fixed value for the right edge of the x-axis
     **kwargs
         Options to pass to pandas plotting method.
 
@@ -126,8 +130,12 @@ def plot_counts(
         )
 
     center = middles.max()
-    if left_static_percent is not None:
-        center = np.float64(left_static_percent) # added to override
+    if (left_fixed_value is not None) and (left_fixed_value >= center):
+        center = np.float64(left_fixed_value) # added to override
+    elif (left_fixed_value is not None):
+        warn(
+            "You might be losing some data since the left fixed value is less than the max value in the data provided. Fixed value not applied."
+        )
 
     padding_values = (middles - center).abs()
     padded_counts = pd.concat([padding_values, counts], axis=1)
@@ -156,8 +164,12 @@ def plot_counts(
         interval = xtick_interval
 
     right_edge = max_width - center
-    if right_static_percent is not None:
-        right_edge = np.float64(right_static_percent) # added to override
+    if (right_fixed_value is not None) and (right_fixed_value >= right_edge):
+        right_edge = np.float64(right_fixed_value) # added to override
+    elif (right_fixed_value is not None):
+        warn(
+            "You might be losing some data since the left fixed value is less than the max value in the data provided. Fixed value not applied."
+        )
     right_labels = np.arange(interval, right_edge + interval, interval)
     right_values = center + right_labels
     left_labels = np.arange(0, center + 1, interval)
@@ -358,8 +370,8 @@ def plot_likert(
     bar_labels: bool = False,
     bar_labels_format=BAR_LABEL_FORMAT,
     bar_labels_color: typing.Union[str, typing.List[str]] = "white",
-    left_static_percent: int = None,
-    right_static_percent: int = None,
+    left_fixed_value: int = None,
+    right_fixed_value: int = None,
     **kwargs,
 ) -> matplotlib.axes.Axes:
     """
@@ -393,6 +405,10 @@ def plot_likert(
         Show a label with the value of each bar segment on top of it
     bar_labels_color : str or list of str = "white",
         If showing bar labels, use this color (or colors) for the text
+    left_fixed_value: int = None,
+        Set a fixed value for the left edge of the x-axis
+    right_fixed_value: int = None,
+        Set a fixed value for the right edge of the x-axis
     **kwargs
         Options to pass to pandas plotting method.
 
@@ -422,8 +438,8 @@ def plot_likert(
         bar_labels=bar_labels,
         bar_labels_format=bar_labels_format,
         bar_labels_color=bar_labels_color,
-        left_static_percent=left_static_percent,
-        right_static_percent=right_static_percent,
+        left_fixed_value=left_fixed_value,
+        right_fixed_value=right_fixed_value,
         **kwargs,
     )
 
