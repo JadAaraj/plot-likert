@@ -57,6 +57,8 @@ def plot_counts(
     bar_labels: bool = False,
     bar_labels_format=BAR_LABEL_FORMAT,
     bar_labels_color: typing.Union[str, typing.List[str]] = "white",
+    left_static_percent: int = None,
+    right_static_percent: int = None,
     **kwargs,
 ) -> matplotlib.axes.Axes:
     """
@@ -124,6 +126,8 @@ def plot_counts(
         )
 
     center = middles.max()
+    if left_static_percent is not None:
+        center = np.float64(left_static_percent) # added to override
 
     padding_values = (middles - center).abs()
     padded_counts = pd.concat([padding_values, counts], axis=1)
@@ -152,6 +156,8 @@ def plot_counts(
         interval = xtick_interval
 
     right_edge = max_width - center
+    if right_static_percent is not None:
+        right_edge = np.float64(right_static_percent) # added to override
     right_labels = np.arange(interval, right_edge + interval, interval)
     right_values = center + right_labels
     left_labels = np.arange(0, center + 1, interval)
@@ -352,6 +358,8 @@ def plot_likert(
     bar_labels: bool = False,
     bar_labels_format=BAR_LABEL_FORMAT,
     bar_labels_color: typing.Union[str, typing.List[str]] = "white",
+    left_static_percent: int = None,
+    right_static_percent: int = None,
     **kwargs,
 ) -> matplotlib.axes.Axes:
     """
@@ -414,6 +422,8 @@ def plot_likert(
         bar_labels=bar_labels,
         bar_labels_format=bar_labels_format,
         bar_labels_color=bar_labels_color,
+        left_static_percent=left_static_percent,
+        right_static_percent=right_static_percent,
         **kwargs,
     )
 
